@@ -62,6 +62,15 @@
         </div>
       </div>
     </section>
+    <section>
+      <form action="/create_room" method="POST">
+        {% csrf_token %}
+        <p>Room</p>
+        <input type="text" name="room_name">
+      <br/>
+      <button>Create Room</button>
+      </form>
+    </section>
 
     <script>
       // Automatically set the focus to the room name input
@@ -79,7 +88,7 @@
         var roomName = document.querySelector("#room-name-input").value;
         var userName = document.querySelector("#username-input").value;
 
-        window.location.replace(roomName + "/?username=" + userName);
+        window.location.replace("room/" + roomName + "/?username=" + userName);
       };
     </script>
   </body>
