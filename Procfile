@@ -1,1 +1,1 @@
-web: gunicorn wave-demo.wsgi
+web: gunicorn wave_demo.wsgi
