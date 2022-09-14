@@ -15,7 +15,8 @@ def dashboard(request):
     return render(request, 'app/dashboard.html')
 
 def dashboard_rooms(request):
-    return render(request, 'app/dashboard_rooms.html')
+    rooms = Room.objects.all()
+    return render(request, 'app/dashboard_rooms.html', {'rooms': rooms})
 
 def create_room(request):
     room_name = request.POST['room_name']

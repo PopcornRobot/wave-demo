@@ -16,10 +16,12 @@
             </tr>
         </thead>
         <tbody>
+            {% for room in rooms %}
             <tr>
-                <td>1</td>
-                <td>name</td>
+                <td>{{ room.id }}</td>
+                <td>{{ room.name }}</td>
             </tr>
+            {% endfor %}
         </tbody>
     </table>
 </body>
