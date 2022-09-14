@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import environ
 import os
 from pathlib import Path
+import dj_database_url
+
 env = environ.Env()
 environ.Env.read_env()
 
@@ -102,11 +104,12 @@ DATABASES = {
         'NAME': env("DATABASE_NAME"), 
         'USER': env("DATABASE_USER"), 
         'PASSWORD': env("DATABASE_PASSWORD"),
-        'HOST': '127.0.0.1', 
+        'HOST': env("DATABASE_HOST"), 
         'PORT': '5432',
     }
 }
 
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
