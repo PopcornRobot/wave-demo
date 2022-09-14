@@ -1,6 +1,8 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
+from app.models import Room
+
 def index(request):
     return render(request, "app/index.html")
 
@@ -14,8 +16,9 @@ def dashboard(request):
 
 def dashboard_rooms(request):
     return render(request, 'app/dashboard_rooms.html')
-    
+
 def create_room(request):
     room_name = request.POST['room_name']
+    Room.objects.create(name=room_name)
     return HttpResponseRedirect('/dashboard')
     # return HttpResponse('create_room ' + room_name)
