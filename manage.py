@@ -2,11 +2,24 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+import environ
 
+env = environ.Env()
+environ.Env.read_env()
+environment = env("ENV")
+
+print("----", environment)
+
+if environment == "local":
+    print("---- using local settings")
+    settings = "wave_demo.settings.local"
+else:
+    print("---- using production settings")
+    settings = "wave_demo.settings.production"
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'wave_demo.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', settings)
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
