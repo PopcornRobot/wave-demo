@@ -1,7 +1,7 @@
 import json
 from channels.generic.websocket import AsyncWebsocketConsumer # The class we're using
 from asgiref.sync import sync_to_async # Implement later
-from app.models import Room
+# from app.models import Room
 
 class AdminConsumer(AsyncWebsocketConsumer):
     async def connect(self):
