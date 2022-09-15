@@ -17,6 +17,7 @@ else:
     print("---- using production settings")
     settings = "wave_demo.settings"
 
+
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', settings)
