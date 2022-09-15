@@ -77,15 +77,7 @@ WSGI_APPLICATION = 'wave_demo.wsgi.application'
 ASGI_APPLICATION = 'wave_demo.asgi.application'
 
 ASGI_APPLICATION = "wave_demo.asgi.application"
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [env("HOST_ADDRESS")],
-            # "hosts": [(env("HOST_ADDRESS"), 6379)],
-        },
-    },
-}
+
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
@@ -109,7 +101,27 @@ DATABASES = {
 }
 
 if environment != "local":
+    CHANNEL_LAYERS = {
+        'default': {
+            'BACKEND': 'channels_redis.core.RedisChannelLayer',
+            'CONFIG': {
+                "hosts": [env("HOST_ADDRESS")],
+                # "hosts": [(env("HOST_ADDRESS"), 6379)],
+            },
+        },
+    }    
     DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+else: 
+    CHANNEL_LAYERS = {
+        'default': {
+            'BACKEND': 'channels_redis.core.RedisChannelLayer',
+            'CONFIG': {
+                # "hosts": [env("HOST_ADDRESS")],
+                "hosts": [(env("HOST_ADDRESS"), 6379)],
+            },
+        },
+    }    
+
 
 
 # Password validation

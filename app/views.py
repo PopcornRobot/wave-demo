@@ -24,5 +24,6 @@ def dashboard_rooms(request):
 def create_room(request):
     room_name = request.POST['room_name']
     Room.objects.create(name=room_name)
-    return HttpResponseRedirect('/dashboard')
+    return HttpResponseRedirect('/room/' + room_name + '/?username=user')
+    # return HttpResponseRedirect('/dashboard/rooms')
     # return HttpResponse('create_room ' + room_name)

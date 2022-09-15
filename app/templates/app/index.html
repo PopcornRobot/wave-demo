@@ -18,15 +18,19 @@
           <div class="column is-6 is-offset-3 mb-6">
             <section class="hero is-primary">
               <div class="hero-body">
-                <p class="title">Chatty</p>
-                <p class="subtitle">
-                  A simple chat built with Django, Channels and Redis
-                </p>
+                <p class="title">WaveLength</p>
+                <form action="/create_room" method="POST">
+                  {% csrf_token %}
+                  <p>Enter Room Name</p>
+                  <input type="text" name="room_name">
+                <br/>
+                <button>Create Room</button>
+                </form>
               </div>
             </section>
           </div>
 
-          <div class="column is-4 is-offset-4">
+          <!-- <div class="column is-4 is-offset-4">
             <div class="field">
               <label>Room name</label>
 
@@ -63,14 +67,8 @@
       </div>
     </section>
     <section>
-      <form action="/create_room" method="POST">
-        {% csrf_token %}
-        <p>Room</p>
-        <input type="text" name="room_name">
-      <br/>
-      <button>Create Room</button>
-      </form>
-    </section>
+
+    </section> -->
 
     <script>
       // Automatically set the focus to the room name input
