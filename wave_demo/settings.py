@@ -29,6 +29,7 @@ SECRET_KEY = 'django-insecure-1^msi(vuxcdqvme$l9szap-%onjsb$4r%9e94zxr=chfv&g2gm
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = ["https://wave-demo.herokuapp.com"]
 
 
 # Application definition
