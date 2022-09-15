@@ -15,7 +15,7 @@ if environment == "local":
     settings = "wave_demo.settings.production"
 else:
     print("---- using production settings")
-    settings = "wave_demo.settings.production"
+    settings = "wave_demo.settings"
 
 
 def main():
