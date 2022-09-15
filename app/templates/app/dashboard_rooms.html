@@ -23,7 +23,7 @@
             {% for room in rooms %}
             <tr>
                 <td><a href="{% url 'app:room_detail' room.id %}">{{ room.id }}</a></td>
-                <td>{{ room.name }}</td>
+                <td><a href="/room/{{room.name}}/user"></a>{{ room.name }}</td>
                 <td>
                     <ul>
                         <li><button class="button" onclick="update_room('{{room.name}}', 'waiting')">waiting</button></li>
