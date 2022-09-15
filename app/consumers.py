@@ -1,6 +1,7 @@
 import json
 from channels.generic.websocket import AsyncWebsocketConsumer # The class we're using
 from asgiref.sync import sync_to_async # Implement later
+from .models import *
 
 class AdminConsumer(AsyncWebsocketConsumer):
     async def connect(self):
@@ -21,6 +22,8 @@ class AdminConsumer(AsyncWebsocketConsumer):
 
         await self.accept()
 
+
+
     # Receive message from WebSocket
     async def receive(self, text_data):
         print("--- AdminConsumer -- receive")
@@ -31,6 +34,10 @@ class AdminConsumer(AsyncWebsocketConsumer):
         room = data['room']
         print(action, message, username, room)
         room_group = 'room_%s' % room
+
+        # Update room page
+        self.room_update(action, room)
+
         # Send message to room group
         await self.channel_layer.group_send(
             # self.room_group_name,
@@ -43,6 +50,13 @@ class AdminConsumer(AsyncWebsocketConsumer):
             'action': action
             }
         )
+
+    # Update room page
+    @sync_to_async
+    def room_update(action, room):
+        room_db = Room.objects.get(name=room)
+        room_db.page = action
+        room_db.save()
 
     # Receive message from room group
     async def message(self, event):
