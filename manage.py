@@ -12,10 +12,10 @@ print("---- environment: ", environment)
 
 if environment == "local":
     print("---- using local settings")
-    settings = "wave_demo.settings.local"
+    settings = "wave_demo.settings.production"
 else:
     print("---- using production settings")
-    settings = "wave_demo.settings"
+    settings = "wave_demo.settings.production"
 
 
 def main():

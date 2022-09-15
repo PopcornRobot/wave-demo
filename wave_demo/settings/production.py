@@ -1,5 +1,6 @@
 from .base import *
 
+print("---- production.py")
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
