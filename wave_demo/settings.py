@@ -9,10 +9,12 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 print("---- in standard settings")
 import environ
 import os
+import dj_database_url
 from pathlib import Path
+
 env = environ.Env()
 environ.Env.read_env()
-
+environment = env("ENV")
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -103,6 +105,9 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
+if environment != "local":
+    DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 
 # Password validation
