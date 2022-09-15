@@ -36,7 +36,7 @@ class AdminConsumer(AsyncWebsocketConsumer):
         room_group = 'room_%s' % room
 
         # Update room page
-        self.room_update(action, room)
+        # self.room_update(action, room)
 
         # Send message to room group
         await self.channel_layer.group_send(
@@ -52,11 +52,11 @@ class AdminConsumer(AsyncWebsocketConsumer):
         )
 
     # Update room page
-    @sync_to_async
-    def room_update(action, room):
-        room_db = Room.objects.get(name=room)
-        room_db.page = action
-        room_db.save()
+    # @sync_to_async
+    # def room_update(action, room):
+    #     room_db = Room.objects.get(name=room)
+    #     room_db.page = action
+    #     room_db.save()
 
     # Receive message from room group
     async def message(self, event):
