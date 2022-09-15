@@ -8,7 +8,7 @@ env = environ.Env()
 environ.Env.read_env()
 environment = env("ENV")
 
-print("----", environment)
+print("---- environment: ", environment)
 
 if environment == "local":
     print("---- using local settings")
