@@ -7,22 +7,32 @@
     <title>Document</title>
 </head>
 <body>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/dashboard/rooms">Rooms</a>
     <h1>Rooms</h1>
     <table>
         <thead>
             <tr>
                 <th>id</th>
                 <th>name</th>
+                <th>action</th>
+
             </tr>
         </thead>
         <tbody>
             {% for room in rooms %}
             <tr>
-                <td>{{ room.id }}</td>
+                <td><a href="{% url 'app:room_detail' room.id %}">{{ room.id }}</a></td>
                 <td>{{ room.name }}</td>
+                <td onclick="color()">color</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+<script>
+    const color = () => {
+        console.log("color hit")
+    }
+</script>
 </body>
 </html>

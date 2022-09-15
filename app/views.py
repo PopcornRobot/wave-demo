@@ -6,10 +6,13 @@ from app.models import Room
 def index(request):
     return render(request, "app/index.html")
 
-def room (request, room_name):
+def room(request, room_name):
     print("----", room_name)
     username = request.GET.get('username', 'Anonymous')
     return render(request, 'app/room.html', {'room_name': room_name, 'username': username})
+
+def room_detail(request, room_id):
+    return render(request, 'app/room_detail.html', {'room_id': room_id})
 
 def dashboard(request):
     return render(request, 'app/dashboard.html')
