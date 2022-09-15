@@ -15,7 +15,8 @@ def room_detail(request, room_id):
     return render(request, 'app/room_detail.html', {'room_id': room_id})
 
 def dashboard(request):
-    return render(request, 'app/dashboard.html')
+    room_count = Room.objects.all().count()
+    return render(request, 'app/dashboard.html', {'room_count': room_count})
 
 def dashboard_rooms(request):
     rooms = Room.objects.all()

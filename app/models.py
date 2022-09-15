@@ -5,4 +5,4 @@ class Player(models.Model):
 
 class Room(models.Model):
     name = models.CharField(max_length=100)
-    
+    page = models.CharField(max_length=100)

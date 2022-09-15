@@ -1,61 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <a href="/dashboard">Dashboard</a>
-    <a href="/dashboard/rooms">Rooms</a>
-    <h1>Rooms</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>name</th>
-                <th>action</th>
-
-            </tr>
-        </thead>
-        <tbody>
-            {% for room in rooms %}
-            <tr>
-                <td><a href="{% url 'app:room_detail' room.id %}">{{ room.id }}</a></td>
-                <td><a href="/room/{{room.name}}/?username=user">{{ room.name }}</a></td>
-                <td>
-                    <ul>
-                        <li><button class="button" onclick="update_room('{{room.name}}', 'waiting')">waiting</button></li>
-                        <li><button class="button" onclick="update_room('{{room.name}}', 'enter clue 1')">enter clue 1</button></li>
-                        <li><button class="button" onclick="update_room('{{room.name}}', 'enter clue 2')">enter clue 2</button></li>
-                        <li><button class="button" onclick="update_room('{{room.name}}', 'game turn')">game turn</button></li>
-                        <li><button class="button" onclick="update_room('{{room.name}}', 'game over')">game over</button></li>
-                    </ul>  
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-<script>
-    const update_room = (room, action) => {
-        console.log("update_room hit", room)
-        adminSocket.send(JSON.stringify({
-            'action': action,
-            'message': 'message',
-            'username': 'userName',
-            'room': room
-        }));        
-    }
-    let web_protocol
-    location.protocol == "http:" ? web_protocol = "ws://" : web_protocol = "wss://"
-    const adminSocket = new WebSocket(
-            web_protocol
-        + window.location.host
-        + '/ws/admin/admin/none'
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WaveDemo</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css"
+    />
+  </head>
+  <body>
+    <section class="section">
+      <div class="container">
+        <div class="columns is-multiline">
+          <div class="column is-7 is-offset-3 mb-7">
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+              <div id="navbarBasicExample" class="navbar-menu">
+                <div class="navbar-start">
+                  <a class="navbar-item" href="/"> Home </a>
+                  <a class="navbar-item" href="/dashboard"> Dashboard </a>
+                  <a class="navbar-item" href="/dashboard/rooms"> Rooms </a>
+                </div>
+              </div>
+            </nav>
+            <section class="hero is-primary">
+                <div class="hero-body">
+                    <p class="title">Room Manager</p>
+                </div>
+            </section>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for room in rooms %}
+                  <tr>
+                    <td>
+                      {{ room.id }}
+                    </td>
+                    <td>
+                      <a href="/room/{{room.name}}/?username=user"
+                        >{{ room.name }}</a
+                      >
+                    </td>
+                    <td>
+                        
+                          <button
+                            class="button"
+                            onclick="update_room('{{room.name}}', 'waiting')"
+                          >
+                            waiting
+                          </button>
+                        
+                        
+                          <button
+                            class="button"
+                            onclick="update_room('{{room.name}}', 'enter clue 1')"
+                          >
+                            enter clue 1
+                          </button>
+                        
+                        
+                          <button
+                            class="button"
+                            onclick="update_room('{{room.name}}', 'enter clue 2')"
+                          >
+                            enter clue 2
+                          </button>
+                        
+                        
+                          <button
+                            class="button"
+                            onclick="update_room('{{room.name}}', 'game turn')"
+                          >
+                            game turn
+                          </button>
+                        
+                        
+                          <button
+                            class="button"
+                            onclick="update_room('{{room.name}}', 'game over')"
+                          >
+                            game over
+                          </button>
+                        
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script>
+      const update_room = (room, action) => {
+        console.log("update_room hit", room);
+        adminSocket.send(
+          JSON.stringify({
+            action: action,
+            message: "message",
+            username: "userName",
+            room: room,
+          })
+        );
+      };
+      let web_protocol;
+      location.protocol == "http:"
+        ? (web_protocol = "ws://")
+        : (web_protocol = "wss://");
+      const adminSocket = new WebSocket(
+        web_protocol + window.location.host + "/ws/admin/admin/none"
         // + "test2"
         // + '/'
-        );
-</script>
-</body>
+      );
+    </script>
+  </body>
 </html>
