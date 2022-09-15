@@ -24,15 +24,38 @@
             <tr>
                 <td><a href="{% url 'app:room_detail' room.id %}">{{ room.id }}</a></td>
                 <td>{{ room.name }}</td>
-                <td onclick="color()">color</td>
+                <td>
+                    <ul>
+                        <li><button class="button" onclick="update_room('{{room.name}}', 'waiting')">waiting</button></li>
+                        <li><button class="button" onclick="update_room('{{room.name}}', 'enter clue 1')">enter clue 1</button></li>
+                        <li><button class="button" onclick="update_room('{{room.name}}', 'enter clue 2')">enter clue 2</button></li>
+                        <li><button class="button" onclick="update_room('{{room.name}}', 'game turn')">game turn</button></li>
+                        <li><button class="button" onclick="update_room('{{room.name}}', 'game over')">game over</button></li>
+                    </ul>  
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 <script>
-    const color = () => {
-        console.log("color hit")
+    const update_room = (room, action) => {
+        console.log("update_room hit", room)
+        adminSocket.send(JSON.stringify({
+            'action': action,
+            'message': 'message',
+            'username': 'userName',
+            'room': room
+        }));        
     }
+    let web_protocol
+    location.protocol == "http:" ? web_protocol = "ws://" : web_protocol = "wss://"
+    const adminSocket = new WebSocket(
+            web_protocol
+        + window.location.host
+        + '/ws/admin/admin/none'
+        // + "test2"
+        // + '/'
+        );
 </script>
 </body>
 </html>

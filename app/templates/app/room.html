@@ -12,15 +12,15 @@
       <div class="container">
         <div class="columns is-multiline">
             <div class="column is-6 is-offset-3">
-              <section class="hero is-primary">
+              <section class="hero is-primary" id="background">
                 <div class="hero-body">
-                  <p class="title">Chatty</p>
-                  <p class="subtitle">A simple chat built with Django, Channels and Redis</p>
+                  <p class="title">Page: <span id="page"></span></p>
+                  <!-- <p class="subtitle">A simple chat built with Django, Channels and Redis</p> -->
                 </div>
               </section>
             </div>
 
-            <div class="column is-6 is-offset-3">
+            <!-- <div class="column is-6 is-offset-3">
               <div class="box">     
                 <div id="chat-messages">
                 </div>
@@ -38,7 +38,7 @@
                 </div>
               </div>
 
-              <small class="has-text-grey-light">Your username: {{ username }}</small>
+              <small class="has-text-grey-light">Your username: {{ username }}</small> -->
             </div>
           </div>
        </div>
@@ -55,16 +55,38 @@ console.log("web_protocol", web_protocol)
 const chatSocket = new WebSocket(
     web_protocol
   + window.location.host
-  + '/ws/'
+  + '/ws/admin/player/'
   + roomName
-  + '/'
+  // + '/'
 );
 
 chatSocket.onmessage = function(e) {
   const data = JSON.parse(e.data);
+  console.log("on message", data.message, data.username, data.action)
 
   if (data.message) {
-    document.querySelector('#chat-messages').innerHTML += ('' + data.username + ': ' + data.message + '');
+    // document.querySelector('#chat-messages').innerHTML += ('' + data.username + ': ' + data.message + '');
+    document.getElementById('page').innerHTML = data.action
+    let bgColor
+    switch(data.action){
+      case "waiting":
+        bgColor = 'lightblue'
+        break
+      case "enter clue 1":
+        bgColor = 'lightgreen'
+        break
+      case "enter clue 2":
+        bgColor = 'lightcoral'
+        break
+      case "game turn":
+        bgColor = 'lightgrey'
+        break
+      case "game over":
+        bgColor = 'lightSlateGrey'
+        break
+    }
+    document.getElementById('background').style.backgroundColor = bgColor
+
   } else {
     alert('The message was empty!')
   }
