@@ -103,14 +103,14 @@ chatSocket.onmessage = function(e) {
 //   const messageInputDom = document.querySelector('#chat-message-input');
 //   const message = messageInputDom.value;
 
-  chatSocket.send(JSON.stringify({
-    'message': message,
-    'username': userName,
-    'room': roomName
-  }));
+//   chatSocket.send(JSON.stringify({
+//     'message': message,
+//     'username': userName,
+//     'room': roomName
+//   }));
 
-  messageInputDom.value = '';
-};
+//   messageInputDom.value = '';
+// };
 
 chatSocket.onclose = function(e) {
   console.error('The socket closed unexpectedly');
