@@ -58,6 +58,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'wave_demo.urls'
+print("---- ROOT_URLCONF", ROOT_URLCONF)
 
 TEMPLATES = [
     {
