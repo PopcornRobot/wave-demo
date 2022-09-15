@@ -107,8 +107,8 @@ DATABASES = {
     }
 }
 
-if environment != "local":
-    DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+# if environment != "local":
+#     DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 
 # Password validation
