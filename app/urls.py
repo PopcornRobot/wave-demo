@@ -5,7 +5,7 @@ app_name = 'app'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('room1/<str:room_name>/', views.room1, name="room1"),
+    path('room/<str:room_name>/', views.room1, name="room1"),
     path('room2/<str:room_name>/', views.room2, name="room2"),
     path('room3/<str:room_name>/', views.room3, name="room3"),
     path('room4/<str:room_name>/', views.room4, name="room4"),
